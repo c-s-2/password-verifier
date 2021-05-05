@@ -4,6 +4,10 @@ const ERRORS = {
 };
 
 const passwordVerifier = password => {
+  if (!password) {
+    throw new Error(ERRORS.NULL);
+  }
+
   if (password.length < 8) {
     throw new Error(ERRORS.LENGTH);
   }

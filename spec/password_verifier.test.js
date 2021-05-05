@@ -13,7 +13,7 @@ describe('Password Verifier', () => {
     it('throws an exception', () => {
       expect(() => {
         passwordVerifier(null);
-      }).toThrow(ERRORS.LENGTH);
+      }).toThrow(ERRORS.NULL);
     });
   });
 
