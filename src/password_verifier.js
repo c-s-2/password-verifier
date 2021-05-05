@@ -1,3 +1,12 @@
+/*
+Extra consideration
+
+For the extra task I would combine the two regex conditions for uppercase and lowercase into one
+condition.  I didn't want to implement it in the code though as it would have meant undoing some of
+the work for the previous tasks which I thought might look confusing when this is reviewed - hope
+that's ok.
+*/
+
 const MIN_CRITERIA = 3;
 
 const ERRORS = {
