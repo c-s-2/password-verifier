@@ -17,9 +17,17 @@ describe('Password Verifier', () => {
     });
   });
 
+  describe('when the password does not contain at least one uppercase letter', () => {
+    it('throws an exception', () => {
+      expect(() => {
+        passwordVerifier('abcdefgh');
+      }).toThrow(ERRORS.UPPER);
+    });
+  });
+
   describe('when all of the conditions are met', () => {
     it('returns true', () => {
-      expect(passwordVerifier('abcdefgh')).toBe(true);
+      expect(passwordVerifier('abcDefgh')).toBe(true);
     });
   });
 });
