@@ -9,6 +9,7 @@ const ERRORS = {
 const passwordVerifier = password => {
   const upperRegex = /(?=.*[A-Z])/;
   const lowerRegex = /(?=.*[a-z])/;
+  const numberRegex = /(?=.*[0-9])/;
 
   if (!password) {
     throw new Error(ERRORS.NULL);
@@ -24,6 +25,10 @@ const passwordVerifier = password => {
 
   if (!lowerRegex.test(password)) {
     throw new Error(ERRORS.LOWER);
+  }
+
+  if (!numberRegex.test(password)) {
+    throw new Error(ERRORS.NUMBER);
   }
 
   return true;
