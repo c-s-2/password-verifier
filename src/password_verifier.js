@@ -1,3 +1,5 @@
+const MIN_CRITERIA = 3;
+
 const ERRORS = {
   LENGTH: 'The password should be longer than 8 characters',
   NULL: 'The password should not be null',
@@ -44,7 +46,7 @@ const passwordVerifier = password => {
     }
   });
 
-  if (successes >= 3) {
+  if (successes >= MIN_CRITERIA) {
     return true;
   }
 
