@@ -1,17 +1,17 @@
-const passwordVerifier = require('../src/password_verifier');
+const { ERRORS, passwordVerifier } = require('../src/password_verifier');
 
 describe('Password Verifier', () => {
   describe('when the password has fewer than 8 characters', () => {
     it('throws an exception', () => {
       expect(() => {
-        passwordVerifier();
-      }).toThrow('The password should be longer than 8 characters');
+        passwordVerifier('abcdefg');
+      }).toThrow(ERRORS.LENGTH);
     });
   });
 
   describe('when all of the conditions are met', () => {
     it('returns true', () => {
-      expect(passwordVerifier()).toBe(true);
+      expect(passwordVerifier('abcdefgh')).toBe(true);
     });
   });
 });
