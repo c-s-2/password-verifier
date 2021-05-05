@@ -6,31 +6,38 @@ const ERRORS = {
   NUMBER: 'The password should contain at least one number',
 };
 
+const criteria = {
+  null: {
+    condition: password => !!password,
+    error: ERRORS.NULL,
+  },
+  length: {
+    condition: password => new RegExp(/(?=.{8,})/).test(password),
+    error: ERRORS.LENGTH,
+  },
+  upper: {
+    condition: password => new RegExp(/(?=.*[A-Z])/).test(password),
+    error: ERRORS.UPPER,
+  },
+  lower: {
+    condition: password => new RegExp(/(?=.*[a-z])/).test(password),
+    error: ERRORS.LOWER,
+  },
+  number: {
+    condition: password => new RegExp(/(?=.*[0-9])/).test(password),
+    error: ERRORS.NUMBER,
+  },
+};
+
 const passwordVerifier = password => {
-  const lengthRegex = /(?=.{8,})/;
-  const upperRegex = /(?=.*[A-Z])/;
-  const lowerRegex = /(?=.*[a-z])/;
-  const numberRegex = /(?=.*[0-9])/;
+  Object.keys(criteria).forEach(key => {
+    const test = criteria[key];
+    const pass = test.condition(password);
 
-  if (!password) {
-    throw new Error(ERRORS.NULL);
-  }
-
-  if (!lengthRegex.test(password)) {
-    throw new Error(ERRORS.LENGTH);
-  }
-
-  if (!upperRegex.test(password)) {
-    throw new Error(ERRORS.UPPER);
-  }
-
-  if (!lowerRegex.test(password)) {
-    throw new Error(ERRORS.LOWER);
-  }
-
-  if (!numberRegex.test(password)) {
-    throw new Error(ERRORS.NUMBER);
-  }
+    if (!pass) {
+      throw new Error(test.error);
+    }
+  });
 
   return true;
 };
