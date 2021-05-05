@@ -5,12 +5,18 @@ const ERRORS = {
 };
 
 const passwordVerifier = password => {
+  const upperRegex = /(?=.*[A-Z])/;
+
   if (!password) {
     throw new Error(ERRORS.NULL);
   }
 
   if (password.length < 8) {
     throw new Error(ERRORS.LENGTH);
+  }
+
+  if (!upperRegex.test(password)) {
+    throw new Error(ERRORS.UPPER);
   }
 
   return true;
