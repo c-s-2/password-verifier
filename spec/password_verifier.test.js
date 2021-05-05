@@ -20,7 +20,7 @@ describe('Password Verifier', () => {
   describe('when the password does not contain at least one uppercase letter', () => {
     it('throws an exception', () => {
       expect(() => {
-        passwordVerifier('abcdefgh');
+        passwordVerifier('abcdefg');
       }).toThrow(ERRORS.UPPER);
     });
   });
@@ -28,7 +28,7 @@ describe('Password Verifier', () => {
   describe('when the password does not contain at least one lowercase letter', () => {
     it('throws an exception', () => {
       expect(() => {
-        passwordVerifier('ABCDEFGH');
+        passwordVerifier('ABCDEFG');
       }).toThrow(ERRORS.LOWER);
     });
   });
@@ -36,7 +36,7 @@ describe('Password Verifier', () => {
   describe('when the password does not contain at least one number', () => {
     it('throws an exception', () => {
       expect(() => {
-        passwordVerifier('abcDefgh');
+        passwordVerifier('abcdefg');
       }).toThrow(ERRORS.NUMBER);
     });
   });

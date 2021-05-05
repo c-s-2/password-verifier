@@ -30,16 +30,25 @@ const criteria = {
 };
 
 const passwordVerifier = password => {
+  let successes = 0;
+  let failures = [];
+
   Object.keys(criteria).forEach(key => {
     const test = criteria[key];
     const pass = test.condition(password);
 
-    if (!pass) {
-      throw new Error(test.error);
+    if (pass) {
+      successes++;
+    } else {
+      failures.push(test.error);
     }
   });
 
-  return true;
+  if (successes >= 3) {
+    return true;
+  }
+
+  throw new Error(failures.join(','));
 };
 
 module.exports = {
