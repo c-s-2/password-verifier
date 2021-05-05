@@ -41,6 +41,12 @@ describe('Password Verifier', () => {
     });
   });
 
+  describe('when three conditions are met', () => {
+    it('returns true', () => {
+      expect(passwordVerifier('abcdefgh')).toBe(true);
+    });
+  });
+
   describe('when all of the conditions are met', () => {
     it('returns true', () => {
       expect(passwordVerifier('abcDefgh1')).toBe(true);
