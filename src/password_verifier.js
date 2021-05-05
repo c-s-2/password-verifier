@@ -7,6 +7,7 @@ const ERRORS = {
 };
 
 const passwordVerifier = password => {
+  const lengthRegex = /(?=.{8,})/;
   const upperRegex = /(?=.*[A-Z])/;
   const lowerRegex = /(?=.*[a-z])/;
   const numberRegex = /(?=.*[0-9])/;
@@ -15,7 +16,7 @@ const passwordVerifier = password => {
     throw new Error(ERRORS.NULL);
   }
 
-  if (password.length < 8) {
+  if (!lengthRegex.test(password)) {
     throw new Error(ERRORS.LENGTH);
   }
 
