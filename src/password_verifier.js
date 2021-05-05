@@ -3,10 +3,12 @@ const ERRORS = {
   NULL: 'The password should not be null',
   UPPER: 'The password should contain at least one uppercase character',
   LOWER: 'The password should contain at least one lowercase character',
+  NUMBER: 'The password should contain at least one number',
 };
 
 const passwordVerifier = password => {
   const upperRegex = /(?=.*[A-Z])/;
+  const lowerRegex = /(?=.*[a-z])/;
 
   if (!password) {
     throw new Error(ERRORS.NULL);
@@ -18,6 +20,10 @@ const passwordVerifier = password => {
 
   if (!upperRegex.test(password)) {
     throw new Error(ERRORS.UPPER);
+  }
+
+  if (!lowerRegex.test(password)) {
+    throw new Error(ERRORS.LOWER);
   }
 
   return true;

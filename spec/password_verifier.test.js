@@ -33,9 +33,17 @@ describe('Password Verifier', () => {
     });
   });
 
+  describe('when the password does not contain at least one number', () => {
+    it('throws an exception', () => {
+      expect(() => {
+        passwordVerifier('abcDefgh');
+      }).toThrow(ERRORS.NUMBER);
+    });
+  });
+
   describe('when all of the conditions are met', () => {
     it('returns true', () => {
-      expect(passwordVerifier('abcDefgh')).toBe(true);
+      expect(passwordVerifier('abcDefgh1')).toBe(true);
     });
   });
 });
