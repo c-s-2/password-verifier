@@ -41,6 +41,14 @@ describe('Password Verifier', () => {
     });
   });
 
+  describe('when the password does not contain a lowercase letter, but satisfies all other criteria', () => {
+    it('throws an exception', () => {
+      expect(() => {
+        passwordVerifier('ABCDEFG1');
+      }).toThrow(ERRORS.LOWER);
+    });
+  });
+
   describe('when three conditions are met', () => {
     it('returns true', () => {
       expect(passwordVerifier('abcdefgh')).toBe(true);
