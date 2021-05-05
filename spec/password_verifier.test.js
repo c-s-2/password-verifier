@@ -25,6 +25,14 @@ describe('Password Verifier', () => {
     });
   });
 
+  describe('when the password does not contain at least one lowercase letter', () => {
+    it('throws an exception', () => {
+      expect(() => {
+        passwordVerifier('ABCDEFGH');
+      }).toThrow(ERRORS.LOWER);
+    });
+  });
+
   describe('when all of the conditions are met', () => {
     it('returns true', () => {
       expect(passwordVerifier('abcDefgh')).toBe(true);

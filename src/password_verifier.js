@@ -2,6 +2,7 @@ const ERRORS = {
   LENGTH: 'The password should be longer than 8 characters',
   NULL: 'The password should not be null',
   UPPER: 'The password should contain at least one uppercase character',
+  LOWER: 'The password should contain at least one lowercase character',
 };
 
 const passwordVerifier = password => {
