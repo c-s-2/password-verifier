@@ -12,22 +12,27 @@ const criteria = {
   null: {
     condition: password => !!password,
     error: ERRORS.NULL,
+    required: false,
   },
   length: {
     condition: password => new RegExp(/(?=.{8,})/).test(password),
     error: ERRORS.LENGTH,
+    required: false,
   },
   upper: {
     condition: password => new RegExp(/(?=.*[A-Z])/).test(password),
     error: ERRORS.UPPER,
+    required: false,
   },
   lower: {
     condition: password => new RegExp(/(?=.*[a-z])/).test(password),
     error: ERRORS.LOWER,
+    required: true,
   },
   number: {
     condition: password => new RegExp(/(?=.*[0-9])/).test(password),
     error: ERRORS.NUMBER,
+    required: false,
   },
 };
 
@@ -36,13 +41,17 @@ const passwordVerifier = password => {
   let failures = [];
 
   Object.keys(criteria).forEach(key => {
-    const test = criteria[key];
-    const pass = test.condition(password);
+    const { condition, error, required } = criteria[key];
+    const pass = condition(password);
+
+    if (required && !pass) {
+      throw new Error(error);
+    }
 
     if (pass) {
       successes++;
     } else {
-      failures.push(test.error);
+      failures.push(error);
     }
   });
 
